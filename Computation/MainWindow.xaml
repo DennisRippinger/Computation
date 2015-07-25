@@ -1,0 +1,153 @@
+﻿<Window x:Class="Computation.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="633" Width="835"
+        WindowState="Maximized"
+        WindowStyle="None">
+    <Window.Background>
+        <ImageBrush ImageSource="/Computation;component/BackgroundTexture.jpg"></ImageBrush>
+    </Window.Background>
+
+    <TabControl KeyboardNavigation.IsTabStop="False" FontFamily="Arial">
+        <TabControl.Background>
+            <ImageBrush ImageSource="/Computation;component/BackgroundTexture.jpg"></ImageBrush>
+        </TabControl.Background>
+        <TabItem Name="computationTab" Header="Auszählung">
+            <Grid Height="573" Width="810">
+                <Grid Height="100" HorizontalAlignment="Left" Margin="90,450,0,0" Name="grid2" VerticalAlignment="Top" Width="600" Background="White" Grid.ColumnSpan="3">
+
+                    <ListView Height="100" HorizontalAlignment="Left" Name="listView_history" VerticalAlignment="Top" Width="600" KeyboardNavigation.TabNavigation="None" FontFamily="Arial">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Width="40" Header="ID" DisplayMemberBinding="{Binding Path=Number}"/>
+                                <GridViewColumn Width="200" Header="Erststimme" DisplayMemberBinding="{Binding Path=FirstVote}"/>
+                                <GridViewColumn Width="370" Header="Zweitstimme" DisplayMemberBinding="{Binding Path=SecondVote}"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </Grid>
+                <Label Content="Wahlauszählung zur Wahl zum Studierendenparlament 2011 / 2012" Height="36" HorizontalAlignment="Left" Margin="12,27,0,0" VerticalAlignment="Top" FontSize="18" FontWeight="Normal" Grid.ColumnSpan="3" Foreground="Black" FontFamily="Arial" />
+
+                <Grid Height="340" HorizontalAlignment="Left" Margin="90,91,0,0" Name="grid1" VerticalAlignment="Top" Width="600" Background="WhiteSmoke" Grid.ColumnSpan="3">
+                    <Label Content="Liste:" Height="28" HorizontalAlignment="Left" Margin="239,48,0,0" Name="label4" VerticalAlignment="Top" FontFamily="Arial" />
+                    <TextBox Height="23" HorizontalAlignment="Left" Margin="300,50,0,0" Name="textBox_firstVoteList" VerticalAlignment="Top" Width="273" IsEnabled="False" Grid.ColumnSpan="2" FontFamily="Arial" />
+                    <Label Content="Name:" Height="28" HorizontalAlignment="Left" Margin="239,121,0,0" Name="label5" VerticalAlignment="Top" FontFamily="Arial" />
+                    <TextBox Height="23" HorizontalAlignment="Left" Margin="300,123,0,0" Name="textBox_secondVoteName" VerticalAlignment="Top" Width="273" IsEnabled="False" Grid.ColumnSpan="2" FontFamily="Arial" />
+                    <Label Content="Liste:" Height="28" HorizontalAlignment="Left" Margin="239,169,0,0" Name="label6" VerticalAlignment="Top" FontFamily="Arial" />
+                    <TextBox Height="23" HorizontalAlignment="Left" Margin="300,171,0,0" Name="textBox_secondVoteList" VerticalAlignment="Top" Width="273" IsEnabled="False" Grid.ColumnSpan="2" FontFamily="Arial" />
+                    <Label Content="Fakultät:" Height="28" HorizontalAlignment="Left" Margin="239,217,0,0" Name="label7" VerticalAlignment="Top" FontFamily="Arial" />
+                    <TextBox Height="23" HorizontalAlignment="Left" Margin="300,219,0,0" Name="textBox_SecondVoteFaculty" VerticalAlignment="Top" Width="273" IsEnabled="False" Grid.ColumnSpan="2" FontFamily="Arial" />
+                    <Button Content="Bestätigen!" Height="46" HorizontalAlignment="Left" Margin="423,280,0,0" Name="button_confirm" VerticalAlignment="Top" Width="150
+                    " Click="enterVote" Grid.ColumnSpan="2" KeyboardNavigation.TabNavigation="Cycle" KeyboardNavigation.TabIndex="2" IsEnabled="False" FontFamily="Arial" />
+                    <Rectangle Height="308" HorizontalAlignment="Left" Margin="220,18,0,0" Name="rectangle1" Stroke="Black" Fill="Black" VerticalAlignment="Top" Width="3" />
+                    <Button Content="Unklar!" Height="46" HorizontalAlignment="Left" Margin="20,280,0,0" Name="button_unclear" VerticalAlignment="Top" Width="150                     " Click="Clarification" IsEnabled="False" FontFamily="Arial" />
+                    <Label Content="Erststimme:" Height="28" HorizontalAlignment="Left" Margin="28,48,0,0" Name="label1" VerticalAlignment="Top" FontFamily="Arial" />
+                    <TextBox Height="23" HorizontalAlignment="Left" Margin="118,50,0,0" Name="textBox_firstVote" VerticalAlignment="Top" Width="52" TabIndex="0" TextChanged="CheckValueFirstVote" IsEnabled="False" FontFamily="Arial" />
+                    <Label Content="Zweitstimme:" Height="28" HorizontalAlignment="Left" Margin="28,121,0,0" Name="label2" VerticalAlignment="Top" FontFamily="Arial" />
+                    <TextBox Height="23" HorizontalAlignment="Left" Margin="118,123,0,0" Name="textBox_secondVote" VerticalAlignment="Top" Width="52"  TabIndex="1" TextChanged="CheckValueSecondVote" IsEnabled="False" FontFamily="Arial" />
+                    <Label Content="Lfd. Nr." Height="28" HorizontalAlignment="Left" Margin="118,18,0,0" Name="label3" VerticalAlignment="Top" FontFamily="Arial" />
+                </Grid>
+                <Label Content="Urne:" Height="28" HorizontalAlignment="Left" Margin="469,60,0,0" Name="label9" VerticalAlignment="Top" FontFamily="Arial" />
+                <ComboBox Height="23" HorizontalAlignment="Left" Margin="513,62,0,0" Name="comboBox_ballotBox" VerticalAlignment="Top" Width="177" KeyboardNavigation.IsTabStop="False" SelectionChanged="EnableVote" FontFamily="Arial">
+                    <ComboBoxItem Content="Duisburg BA" />
+                    <ComboBoxItem Content="Duisburg LA" />
+                    <ComboBoxItem Content="Duisburg LB" />
+                    <ComboBoxItem Content="Duisburg MM" />
+                    <ComboBoxItem Content="Essen Audimax/Klinikum" />
+                    <ComboBoxItem Content="Essen Bibliotheksfoyer (R09)" />
+                    <ComboBoxItem Content="Essen Hörsaalzentrum (S05)" />
+                    <ComboBoxItem Content="Essen Mensa" />
+                    <ComboBoxItem Content="Essen R12" />
+                </ComboBox>
+                <Label Content="Ungültig:        999" Height="28" HorizontalAlignment="Left" Margin="692,170,0,0" Name="label10" VerticalAlignment="Top" Width="104" FontFamily="Arial" />
+                <Label Content="Enthaltung:     000" Height="28" HorizontalAlignment="Left" Margin="692,136,0,0" Name="label11" VerticalAlignment="Top" Width="116" FontFamily="Arial" />
+                <Label Content="Legende:" Height="28" HorizontalAlignment="Left" Margin="692,102,0,0" Name="label12" VerticalAlignment="Top" FontFamily="Arial" />
+            </Grid>
+        </TabItem>
+        <TabItem Header="Tickets" Name="ticketTab">
+            <Grid Width="810" Height="573">
+                <Label Content="Wahlauszählung zur Wahl zum Studierendenparlament 2011 / 2012" Height="36" HorizontalAlignment="Left" Margin="12,27,0,0" Name="label13" VerticalAlignment="Top" FontSize="18" FontWeight="Normal" Grid.ColumnSpan="3" FontFamily="Arial" />
+                <Grid Height="340" HorizontalAlignment="Left" Margin="90,91,0,0" Name="grid3" VerticalAlignment="Top" Width="660" Background="WhiteSmoke">
+                    <ListView Height="141" HorizontalAlignment="Left" Margin="32,18,0,0" Name="listView_tickets" VerticalAlignment="Top" Width="600"  SelectionChanged="selectTicket" FontFamily="Arial">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Width="40" Header="ID" DisplayMemberBinding="{Binding Path=Id}"/>
+                                <GridViewColumn Width="200" Header="Gruppe" DisplayMemberBinding="{Binding Path=GroupId}" />
+                                <GridViewColumn Width="200" Header="Urne" DisplayMemberBinding="{Binding Path=BallotBox}" />
+                                <GridViewColumn Width="200" Header="ID" DisplayMemberBinding="{Binding Path=Number}" />
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <Button Content="Ticket abschließen" Height="46" HorizontalAlignment="Left" Margin="328,209,0,0" Name="button_finshTicket" VerticalAlignment="Top" Width="150" Click="CloseTicket" FontFamily="Arial" />
+                    <Label Content="ID:" Height="28" HorizontalAlignment="Left" Margin="101,175,0,0" Name="label14" VerticalAlignment="Top" FontFamily="Arial" />
+                    <Label Content="Gruppe:" Height="28" HorizontalAlignment="Left" Margin="101,209,0,0" Name="label15" VerticalAlignment="Top" FontFamily="Arial" />
+                    <Label Content="Urne:" Height="28" HorizontalAlignment="Left" Margin="101,243,0,0" Name="label16" VerticalAlignment="Top" FontFamily="Arial" />
+                    <Label Content="Nummer:" Height="28" HorizontalAlignment="Left" Margin="101,277,0,0" Name="label17" VerticalAlignment="Top" FontFamily="Arial" />
+                    <TextBox Height="23" HorizontalAlignment="Left" Margin="160,177,0,0" Name="textBox_ticketID" VerticalAlignment="Top" Width="141" IsEnabled="False" FontFamily="Arial" />
+                    <TextBox Height="23" HorizontalAlignment="Left" Margin="160,211,0,0" Name="textBox_ticketGroup" VerticalAlignment="Top" Width="141" IsEnabled="False" FontFamily="Arial" />
+                    <TextBox Height="23" HorizontalAlignment="Left" Margin="160,248,0,0" Name="textBox_ticketBallotBox" VerticalAlignment="Top" Width="141" IsEnabled="False" FontFamily="Arial" />
+                    <TextBox Height="23" HorizontalAlignment="Left" Margin="160,282,0,0" Name="textBox_ticketNumber" VerticalAlignment="Top" Width="141" IsEnabled="False" FontFamily="Arial" />
+
+                    <Button Margin="603,282,0,0" Name="button_update" Click="updateTickets" Background="Transparent">
+                        <DockPanel>
+                            <Image Source="update.png"/>
+                        </DockPanel>
+                    </Button>
+
+                </Grid>
+                <Label Content="Tickets werden alle 20 Sekunden aktualisiert" Height="28" HorizontalAlignment="Left" Margin="507,437,0,0" Name="label18" VerticalAlignment="Top" FontFamily="Arial" />
+            </Grid>
+        </TabItem>
+        <TabItem Header="Auswertung" Name="tabItem_overview">
+            <Grid Width="810" Height="573">
+                <Button Margin="522,446,225,68" Name="button_updateOVerview" Click="updateResults" Background="Transparent">
+                    <DockPanel>
+                        <Image Source="update.png"/>
+                    </DockPanel>
+                </Button>
+                <Label Content="Wahlauszählung zur Wahl zum Studierendenparlament 2011 / 2012" FontSize="18" FontWeight="Normal" Height="36" HorizontalAlignment="Left" Margin="12,27,0,0" Name="label19" VerticalAlignment="Top" FontFamily="Arial" />
+                <Grid Background="WhiteSmoke" Height="340" HorizontalAlignment="Left" Margin="90,91,0,0" VerticalAlignment="Top" Width="660">
+                    <ComboBox Height="23" HorizontalAlignment="Left" Margin="481,18,0,0" Name="comboBox_ballotBoxOverview" VerticalAlignment="Top" Width="161" SelectionChanged="ProcessOverview" FontFamily="Arial">
+                        <ComboBoxItem Content="Duisburg BA" />
+                        <ComboBoxItem Content="Duisburg LA" />
+                        <ComboBoxItem Content="Duisburg LB" />
+                        <ComboBoxItem Content="Duisburg MM" />
+                        <ComboBoxItem Content="Essen Audimax/Klinikum" />
+                        <ComboBoxItem Content="Essen Bibliotheksfoyer (R09)" />
+                        <ComboBoxItem Content="Essen Hörsaalzentrum (S05)" />
+                        <ComboBoxItem Content="Essen Mensa" />
+                        <ComboBoxItem Content="Essen R12" />
+                        <ComboBoxItem Content="Gesamt" />
+                    </ComboBox>
+                    <Label Content="Urne:" Height="28" HorizontalAlignment="Left" Margin="437,13,0,0" Name="label20" VerticalAlignment="Top" FontFamily="Arial" />
+                    <Rectangle Fill="Black" Height="280" HorizontalAlignment="Left" Margin="267,46,0,0" Name="rectangle2" Stroke="Black" VerticalAlignment="Top" Width="3" />
+                    <Label Content="Erststimme:" Height="28" HorizontalAlignment="Left" Margin="16,46,0,0" Name="label21" VerticalAlignment="Top" FontFamily="Arial" />
+                    <Label Content="Zweitstimme:" Height="28" HorizontalAlignment="Left" Margin="286,46,0,0" Name="label22" VerticalAlignment="Top" FontFamily="Arial" />
+                    <ListView Height="246" HorizontalAlignment="Left" Margin="16,80,0,0" Name="listView_fristVotesEvaluation" VerticalAlignment="Top" Width="245" FontFamily="Arial">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Width="180" Header="Liste" DisplayMemberBinding="{Binding Path=List}"/>
+                                <GridViewColumn Width="60" Header="Stimmen" DisplayMemberBinding="{Binding Path=Votes}" />
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <ListView Height="246" HorizontalAlignment="Left" Margin="276,80,0,0" Name="listView_secondVotesEvaluation" VerticalAlignment="Top" Width="366" FontFamily="Arial">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Width="130" Header="Name" DisplayMemberBinding="{Binding Path=Name}"/>
+                                <GridViewColumn Width="150" Header="Liste" DisplayMemberBinding="{Binding Path=List}"/>
+                                <GridViewColumn Width="60" Header="Stimmen" DisplayMemberBinding="{Binding Path=Votes}"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </Grid>
+                <Button Margin="687,443,60,71" Name="Export" Click="exportToCsv" Background="Transparent">
+                    <DockPanel>
+                        <Image Source="export.png" />
+                    </DockPanel>
+                </Button>
+
+            </Grid>
+        </TabItem>
+    </TabControl>
+</Window>
